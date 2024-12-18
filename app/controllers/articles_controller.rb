@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = Article.all.order("created_at asc")
   end
 
   def show
@@ -33,6 +33,16 @@ class ArticlesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @article = Article.find_by(id: params[:id])
+    if @article.destroy
+      flash[:success] = "Article has been deleted"
+    else
+      flash[:errors] = "Article could not be deleted"
+    end
+    render :index
   end
 
   private

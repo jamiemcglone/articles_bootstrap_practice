@@ -3,7 +3,9 @@
     <%= link_to article.title, article_path(article), class: "card-title" %>
     <div class="card-body">
       <p class="card-text"><%= article.body %></p>
+      <p class="card-text"><%= article.created_at.strftime("%d/%m/%y") %></p>
     </div>
     <%= link_to "Edit article", edit_article_path(article), class: "card-link" %>
+    <%= button_to 'Delete', article, method: :delete, form:{ data: { turbo_confirm: 'Are you sure?' }} , class: "btn btn-danger"%>
   </div>
 </div>
